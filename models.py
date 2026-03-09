@@ -56,3 +56,32 @@ def get_goals():
 
     conn.close()
     return goals
+
+def add_event(name, deadline, category, goal_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO events (name, deadline, category, goal_id)
+        VALUES (?, ?, ?, ?)
+        """,
+        (name, deadline, category, goal_id)
+    )
+
+    conn.commit()
+    conn.close()
+    
+def get_events(goal_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM events WHERE goal_id = ?",
+        (goal_id,)
+    )
+
+    events = cursor.fetchall()
+
+    conn.close()
+    return events
