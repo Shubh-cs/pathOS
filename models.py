@@ -34,3 +34,15 @@ def create_tables():
 
     conn.commit()
     conn.close()
+
+def add_goal(name):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO goals (name) VALUES (?)",
+        (name,)
+    )
+
+    conn.commit()
+    conn.close()
