@@ -46,3 +46,13 @@ def add_goal(name):
 
     conn.commit()
     conn.close()
+
+def get_goals():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM goals")
+    goals = cursor.fetchall()
+
+    conn.close()
+    return goals

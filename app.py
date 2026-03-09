@@ -1,5 +1,5 @@
 import streamlit as st
-from models import create_tables,add_goal
+from models import create_tables,add_goal,get_goals
 
 create_tables()
 
@@ -15,3 +15,13 @@ with st.expander("➕ Add Goal"):
             st.success(f"Goal '{goal_name}' added successfully!")
         else:
             st.warning("Please enter a goal name.")
+
+st.subheader("Current Goals")
+
+goals = get_goals()
+
+if goals:
+    for goal in goals:
+        st.write(f"🎯 {goal['name']}")
+else:
+    st.info("No goals added yet.")
